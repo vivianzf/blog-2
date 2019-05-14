@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <section class="login-section">
+    <h3>后台管理</h3>
+    <hr />
+
+    <form class="login-form" [formGroup]="fg" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>账号</mat-label>
+        <mat-icon matPrefix>account_box</mat-icon>
+        <input matInput [errorStateMatcher]="usernameErrorMatcher" placeholder="username" formControlName="username" type="text" name="username" autocomplete="off"/>
+        <mat-error *ngIf="username.hasError('required')">没有填写账号</mat-error>
+        <mat-error *ngIf="username.hasError('minlength')">最少4位, 只填写了 <strong>{{username.getError('minlength').actualLength}}</strong> 位</mat-error>
+        <mat-error *ngIf="username.hasError('maxlength')">最多12位</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>密码</mat-label>
+        <mat-icon matPrefix>lock</mat-icon>
+        <input type="password" [errorStateMatcher]="passwordErrorMatcher" placeholder="password" formControlName="password" matInput name="password"/>
+        <mat-error *ngIf="password.hasError('required')">没有填写密码</mat-error>
+        <mat-error *ngIf="password.hasError('minlength')">最少6位, 只填写了 <strong>{{password.getError('minlength').actualLength}}</strong> 位</mat-error>
+        <mat-error *ngIf="password.hasError('maxlength')">最多120位</mat-error>
+      </mat-form-field>
+
+      <div class="form-footer">
+        <button mat-raised-button type="submit" color="primary" class="login-btn">登录</button>
+        <button mat-raised-button type="button" class="register-btn" (click)="onRegister()">注册</button>
+      </div>
+    </form>
+  </section>
+</div>
